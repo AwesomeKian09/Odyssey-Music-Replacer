@@ -206,7 +206,7 @@ Sky01,StmRsBgmSky01
             messagebox.showerror("Error", "Selected song does not have an internal ID.")
             return
 
-        output_folder = os.path.join(os.getcwd(), f"mod_output/{internal_id}")
+        output_folder = os.path.join(os.path.dirname(__file__), "mod_output", internal_id)
         os.makedirs(output_folder, exist_ok=True)
 
         wav_path = os.path.join(output_folder, "converted.wav")
