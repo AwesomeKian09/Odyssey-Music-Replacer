@@ -217,7 +217,10 @@ Sky01,StmRsBgmSky01
             subprocess.run(["ffmpeg", "-i", self.file_path.get(), wav_path], check=True)
 
             # Convert to .bfstm (assumes LoopingAudioConverter or similar is available)
-            subprocess.run(["LoopingAudioConverter.exe", wav_path, "-o", bfstm_path], check=True)
+            converter_path = os.path.join(os.path.dirname(__file__), "LoopingAudioConverter.exe")
+            if not os.path.exists(converter_path):
+                raise FileNotFoundError("LoopingAudioConverter.exe not found. Please make sure it's in the same folder as this script.")
+            subprocess.run([converter_path, wav_path, "-o", bfstm_path], check=True)
 
             # Generate prefetch internally
             prefetch_path = os.path.join(output_folder, f"{internal_id}.prefetchinfo")
